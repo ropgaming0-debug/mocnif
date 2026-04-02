@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoncifEdits AI — Premium beat-synced cinematic video editor. Create stunning car edits with AI-powered beat detection and motion effects.">
+    <title>MoncifEdits AI — Cinematic Video Editor</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-gradient"></div>
+    <div class="particles"></div>
+
+    <!-- ══════════════════════════════════════════
+         HERO SECTION
+         ══════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="{{ url_for('static', filename='images/hero_car.png') }}" alt="Modified car hero">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">✦ AI-Powered Video Editor ✦</div>
+            <h1 class="hero-title">MONCIFEDITS</h1>
+            <p class="hero-subtitle">Beat-Synced Cinematic Editing Engine</p>
+            <a href="#editor" class="hero-cta">
+                Create Your Edit
+                <span class="arrow">→</span>
+            </a>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <div class="scroll-text">Scroll</div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         GALLERY SECTION
+         ══════════════════════════════════════════ -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">Showcase</div>
+                <h2 class="section-title">Built Different</h2>
+                <p class="section-desc">Premium automotive edits powered by AI beat synchronization</p>
+            </div>
+            <div class="divider reveal"></div>
+            <div class="gallery-grid">
+                <div class="gallery-card reveal">
+                    <img src="{{ url_for('static', filename='images/hero_car.png') }}" alt="BMW Edit" loading="lazy">
+                    <div class="gallery-card-info">
+                        <div class="gallery-card-title">BMW M4 Competition</div>
+                        <div class="gallery-card-tag">Funk Bounce • 140 BPM</div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal">
+                    <img src="{{ url_for('static', filename='images/car_gallery_1.png') }}" alt="Mercedes Edit" loading="lazy">
+                    <div class="gallery-card-info">
+                        <div class="gallery-card-title">Mercedes AMG GT</div>
+                        <div class="gallery-card-tag">Velocity Edit • 128 BPM</div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal">
+                    <img src="{{ url_for('static', filename='images/car_gallery_2.png') }}" alt="Audi Edit" loading="lazy">
+                    <div class="gallery-card-info">
+                        <div class="gallery-card-title">Audi RS7 Sportback</div>
+                        <div class="gallery-card-tag">Hard Edit • 155 BPM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         EDITOR SECTION
+         ══════════════════════════════════════════ -->
+    <section class="editor-section" id="editor">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">Editor</div>
+                <h2 class="section-title">Create Your Edit</h2>
+                <p class="section-desc">Upload your footage and music — AI handles the rest</p>
+            </div>
+            <div class="divider reveal"></div>
+
+            <!-- Upload Cards -->
+            <div class="editor-grid reveal">
+                <div class="glass-card">
+                    <span class="card-icon">📹</span>
+                    <div class="card-label">Raw Footage</div>
+                    <div class="card-hint">Your car video — any angle, any car</div>
+                    <div class="upload-zone" id="videoZone">
+                        <div class="upload-icon">⬆</div>
+                        <div class="upload-text">
+                            Drag & drop or <span>browse</span>
+                        </div>
+                        <div class="upload-formats">MP4 • MOV • AVI — Up to 500MB</div>
+                    </div>
+                    <input type="file" id="videoUpload" accept="video/mp4,video/quicktime,video/avi,.mp4,.mov,.avi">
+                </div>
+
+                <div class="glass-card">
+                    <span class="card-icon">🎵</span>
+                    <div class="card-label">Audio Track</div>
+                    <div class="card-hint">Funk, Phonk, or any beat-heavy music</div>
+                    <div class="upload-zone" id="audioZone">
+                        <div class="upload-icon">⬆</div>
+                        <div class="upload-text">
+                            Drag & drop or <span>browse</span>
+                        </div>
+                        <div class="upload-formats">MP3 • WAV — Up to 50MB</div>
+                    </div>
+                    <input type="file" id="audioUpload" accept="audio/mpeg,audio/wav,.mp3,.wav">
+                </div>
+            </div>
+
+            <!-- Edit Style Presets -->
+            <div class="section-header reveal" style="margin-top: 20px;">
+                <div class="section-badge">Style</div>
+                <h2 class="section-title" style="font-size: clamp(1.5rem, 3vw, 2.2rem);">Choose Your Edit Style</h2>
+            </div>
+
+            <div class="preset-grid reveal">
+                {% for key, preset in presets.items() %}
+                <div class="preset-card" data-preset="{{ key }}">
+                    <div class="preset-check">✓</div>
+                    <span class="preset-icon">{{ preset.icon }}</span>
+                    <div class="preset-name">{{ preset.name }}</div>
+                    <div class="preset-desc">{{ preset.desc }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Settings -->
+            <div class="settings-grid reveal">
+                <div class="setting-card">
+                    <div class="setting-label">Beat Intensity</div>
+                    <div class="range-wrap">
+                        <input type="range" class="range-slider" id="intensitySlider"
+                               min="0.3" max="2.0" step="0.1" value="1.0">
+                        <div class="range-value" id="intensityValue">1.0x</div>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-label">Render Quality</div>
+                    <div class="quality-toggle">
+                        <button class="quality-btn" data-quality="stable">Stable</button>
+                        <button class="quality-btn active" data-quality="hd">HD</button>
+                        <button class="quality-btn" data-quality="ultra">Ultra</button>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <div class="setting-label">Project Name</div>
+                    <input type="text" class="text-input" id="projectName"
+                           value="NEW_EDIT_01" placeholder="MY_CAR_EDIT">
+                </div>
+            </div>
+
+            <!-- Render Button -->
+            <div class="reveal">
+                <button class="render-btn" id="renderBtn" disabled>
+                    ⚡ &nbsp; EXECUTE CINEMATIC RENDER &nbsp; ⚡
+                </button>
+            </div>
+
+            <!-- Render Progress -->
+            <div class="render-progress" id="renderProgress">
+                <div class="progress-card">
+                    <span class="progress-icon">🎬</span>
+                    <div class="progress-label" id="progressStep">Initializing...</div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-pct" id="progressPct">0%</div>
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-value" id="bpmValue">—</div>
+                            <div class="stat-label">BPM Detected</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="beatsValue">—</div>
+                            <div class="stat-label">Beat Points</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="statusValue">ACTIVE</div>
+                            <div class="stat-label">Status</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output -->
+            <div class="output-section" id="outputSection">
+                <div class="output-card">
+                    <div class="output-success">✅</div>
+                    <div class="output-title">Render Complete</div>
+                    <video class="output-video" id="outputVideo" controls></video>
+                    <br>
+                    <a class="download-btn" id="downloadBtn" href="#" download>
+                        ⬇ &nbsp; Download Edit
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-text">
+                Built by <span class="footer-brand">MoncifEdits</span> • Powered by AI
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

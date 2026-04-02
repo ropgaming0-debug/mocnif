@@ -1,0 +1,10 @@
+streamlit
+moviepy
+librosa
+numpy
+soundfile
+flask
+Pillow
+opencv-python-headless
+ultralytics
+gunicorn
