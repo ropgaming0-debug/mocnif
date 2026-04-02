@@ -341,9 +341,9 @@ def apply_beat_cuts(clip, beat_data, video_duration):
 # ============================================================
 
 def render_job(job_id, v_path, a_path, preset_key, intensity_mult, quality):
-    import moviepy.editor as mpe
-
     try:
+        import moviepy.editor as mpe
+        
         jobs[job_id]['status'] = 'analyzing'
         jobs[job_id]['progress'] = 10
         beat_data = detect_beats(a_path)
